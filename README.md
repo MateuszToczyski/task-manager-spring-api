@@ -4,7 +4,7 @@ This project contains a simple task management API.
 
 ## Database
 
-The project uses MySQL database, consisting of a single table 'TASKS':
+The project uses MySQL database, consisting of a single table `TASKS`:
 
 ```
 CREATE TABLE `tasks` (
@@ -23,7 +23,7 @@ CREATE TABLE `tasks` (
 - ORM: **Hibernate**
 - Annotation processor: **Project Lombok**
 
-## HTTP endpoints
+## HTTP requests
 
 ### Get all tasks
 
@@ -31,4 +31,4 @@ CREATE TABLE `tasks` (
 
 ### Get a task by id
 
-> GET /v1/task/getTask?id=<id>
+> GET /v1/task/getTask?id=[id]
