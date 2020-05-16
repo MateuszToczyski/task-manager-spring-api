@@ -25,10 +25,10 @@ CREATE TABLE `tasks` (
 
 ## HTTP endpoints
 
-# Get all tasks
+### Get all tasks
 
 > GET /v1/task/getTasks
 
-# Get a task by id
+### Get a task by id
 
 > GET /v1/task/getTask?id=<id>
