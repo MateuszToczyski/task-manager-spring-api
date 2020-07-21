@@ -6,13 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreatedCard {
+public class CreatedCardDto {
 
     @JsonProperty("id")
     private String id;

@@ -3,7 +3,7 @@ package com.crud.tasks.trello.client;
 import com.crud.tasks.domain.trello.Badges;
 import com.crud.tasks.domain.trello.BoardDto;
 import com.crud.tasks.domain.trello.CardDto;
-import com.crud.tasks.domain.trello.CreatedCard;
+import com.crud.tasks.domain.trello.CreatedCardDto;
 import com.crud.tasks.trello.config.TrelloConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +18,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrelloClientTestSuite {
@@ -68,12 +67,12 @@ public class TrelloClientTestSuite {
 
         URI uri = new URI("http://test.com/cards?key=test&token=test&name=Test%20task&desc=Test%20Description&pos=top&idList=test_id");
 
-        CreatedCard createdTrelloCard = new CreatedCard("1", "Test task",
+        CreatedCardDto createdTrelloCard = new CreatedCardDto("1", "Test task",
                 "http://test.com", new Badges());
 
-        when(restTemplate.postForObject(uri, null, CreatedCard.class)).thenReturn(createdTrelloCard);
+        when(restTemplate.postForObject(uri, null, CreatedCardDto.class)).thenReturn(createdTrelloCard);
 
-        CreatedCard newCard = trelloClient.createNewCard(cardDto);
+        CreatedCardDto newCard = trelloClient.createNewCard(cardDto);
 
         assertEquals("1", newCard.getId());
         assertEquals("Test task", newCard.getName());
