@@ -17,26 +17,18 @@ public class TrelloService {
 
     private static final String SUBJECT = "Tasks: New Trello Board";
 
-    @Autowired
-    private AdminConfig adminConfig;
-
-    @Autowired
-    private TrelloClient trelloClient;
-
-    @Autowired
-    private SimpleEmailService emailService;
+    @Autowired private AdminConfig adminConfig;
+    @Autowired private TrelloClient trelloClient;
+    @Autowired private SimpleEmailService emailService;
 
     public List<BoardDto> fetchBoards() {
         return trelloClient.getTrelloBoards();
     }
 
     public CreatedCardDto createCard(CardDto cardDto) {
-
         CreatedCardDto newCard = trelloClient.createNewCard(cardDto);
-
         Optional.ofNullable(newCard).ifPresent(card -> emailService.send(new Mail(adminConfig.getAdminMail(), null,
                 SUBJECT, "New card: " + card.getName() + " has been created on your Trello account")));
-
         return newCard;
     }
 }

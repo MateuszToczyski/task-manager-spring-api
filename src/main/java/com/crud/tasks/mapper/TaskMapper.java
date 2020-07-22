@@ -18,7 +18,7 @@ public class TaskMapper {
         return new TaskDto(task.getId(), task.getTitle(), task.getContent());
     }
 
-    public List<TaskDto> mapTOTaskDtoList(List<Task> tasks) {
+    public List<TaskDto> mapToTaskDtoList(List<Task> tasks) {
         return tasks.stream()
                 .map(task -> new TaskDto(task.getId(), task.getTitle(), task.getContent()))
                 .collect(Collectors.toList());
