@@ -43,7 +43,7 @@ public class TrelloMapperTestSuite {
         );
         List<BoardDto> boardDtos = mapper.mapToBoardDtos(boards);
         assertEquals(2, boardDtos.size());
-        assertEquals("Board 1", boardDtos.get(0).getName());
+        assertEquals("Board 1", boardDtos.get(0).getId());
     }
 
     @Test

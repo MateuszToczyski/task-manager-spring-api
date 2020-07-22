@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class TrelloMapper {
 
     public Board mapToBoard(BoardDto boardDto) {
-        return new Board(boardDto.getId(), boardDto.getName(), mapToLists(boardDto.getLists()));
+        return new Board(boardDto.getName(), boardDto.getId(), mapToLists(boardDto.getLists()));
     }
 
     public BoardDto mapToBoardDto(Board board) {
