@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,13 +19,13 @@ public class SimpleEmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
+    @Autowired
+    private MailCreatorService mailCreatorService;
+
     public void send(Mail mail) {
-
         LOGGER.info("Sending email...");
-
         try {
-            SimpleMailMessage mailMessage = createMailMessage(mail);
-            javaMailSender.send(mailMessage);
+            javaMailSender.send(createMimeMessage(mail));
             LOGGER.info("Email sent");
         } catch(MailException e) {
             //noinspection PlaceholderCountMatchesArgumentCount
@@ -31,17 +33,23 @@ public class SimpleEmailService {
         }
     }
 
-    private SimpleMailMessage createMailMessage(Mail mail) {
+    private MimeMessagePreparator createMimeMessage(Mail mail) {
+        return mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+        };
+    }
 
+    private SimpleMailMessage createMailMessage(Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-
         if(mail.getCc() != null) {
             mailMessage.setCc(mail.getCc());
         }
-
         return mailMessage;
     }
 }
