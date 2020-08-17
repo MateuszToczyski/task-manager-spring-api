@@ -21,11 +21,11 @@ dependencies {
 			'org.springframework.boot:spring-boot-starter-actuator',
 			'org.springframework.boot:spring-boot-starter-thymeleaf',
 			'org.projectlombok:lombok',
-			'mysql:mysql-connector-java',
+			//'mysql:mysql-connector-java',
 			'io.springfox:springfox-swagger2:2.7.0',
 			'io.springfox:springfox-swagger-ui:2.7.0',
-			'com.google.code.gson:gson:2.8.2'
-			//'org.postgresql:postgresql'
+			'com.google.code.gson:gson:2.8.2',
+			'org.postgresql:postgresql'
 	)
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
