@@ -35,7 +35,7 @@ public class TrelloControllerTestSuite {
     public void shouldFetchEmptyTrelloBoards() throws Exception {
         List<BoardDto> boards = new ArrayList<>();
         when(trelloFacade.fetchTrelloBoards()).thenReturn(boards);
-        mockMvc.perform(get("/v1/trello/getTrelloBoards").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/trello/boards").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
@@ -50,7 +50,7 @@ public class TrelloControllerTestSuite {
 
         when(trelloFacade.fetchTrelloBoards()).thenReturn(boardDtos);
 
-        mockMvc.perform(get("/v1/trello/getTrelloBoards").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/trello/boards").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].id", is("1")))
@@ -71,7 +71,7 @@ public class TrelloControllerTestSuite {
         Gson gson = new Gson();
         String jsonContent = gson.toJson(cardDto);
 
-        mockMvc.perform(post("/v1/trello/createTrelloCard")
+        mockMvc.perform(post("/v1/trello/cards")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))

@@ -47,21 +47,21 @@ public class TaskControllerTestSuite {
 
     @Test
     public void testGetTasks() throws Exception {
-        mockMvc.perform(get("/v1/task/getTasks").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/tasks").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title", is("title 1")));
     }
 
     @Test
     public void testGetTask() throws Exception {
-        mockMvc.perform(get("/v1/task/getTask?id=1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/tasks/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title", is("title 1")));
     }
 
     @Test
     public void testDeleteTask() throws Exception {
-        mockMvc.perform(delete("/v1/task/deleteTask?id=1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete("/v1/tasks/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -72,7 +72,7 @@ public class TaskControllerTestSuite {
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
 
-        mockMvc.perform(put("/v1/task/updateTask")
+        mockMvc.perform(put("/v1/tasks")
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("UTF-8")
                     .content(jsonContent))
@@ -87,7 +87,7 @@ public class TaskControllerTestSuite {
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
 
-        mockMvc.perform(post("/v1/task/createTask")
+        mockMvc.perform(post("/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
